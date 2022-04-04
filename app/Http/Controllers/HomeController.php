@@ -1,17 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $viewData = [];
         $viewData['title'] = "Prestadesk - Online Store";
+        
         return view('home.index')->with('viewData', $viewData);
     }
 
-    public function about(){
+    public function about()
+    {
 
         //$title= "About us - Online Store";
         //$subtitle = "About us";
