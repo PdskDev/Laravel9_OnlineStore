@@ -13,23 +13,23 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-                <a type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</a>
+                <a type="button" class="btn-close" data-bs-dismiss="alert">&times;</a>
             </div>
             @endif
 
             @if ($message = Session::get('successAdd'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ $message }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                {{ $message }}
+                <a type="button" class="btn-close" data-bs-dismiss="alert">&times;</a>
             </div>
             @endif
 
-            <form action="{{ route('admin.product.store') }}" method="POST">
+            <form method="POST" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col">
                         <div class="mb-3 row">
-                            <label for="name" class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
+                            <label for="name" class="form-label">Name:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
                                 <input name="name" value="{{ old('name') }}" type="text" class="form-control">
                             </div>
@@ -37,18 +37,31 @@
                     </div>
                     <div class="col">
                         <div class="mb-3 row">
-                            <label for="price" class="col-lg-2 col-md-6 col-sm-12 col-form-label">Price:</label>
+                            <label for="price" class="form-label">Price:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
                                 <input name="price" value="{{ old('price') }}" type="number" class="form-control">
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 row">
+                            <label for="image" class="form-label">Image:</label>
+                            <div class="col-lg-10 col-md-6 col-sm-12">
+                                <input class="form-control" type="file" name="image">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">description</label>
                     <textarea name="description" class="form-control">{{ old('description') }}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Add New</button>
+                <button type="submit" class="btn btn-primary"><i href="" class="bi bi-bag-plus-fill"></i></button>
             </form>
         </div>
     </div>
@@ -57,40 +70,43 @@
             Catalog of products
         </div>
         <div class='card-body'>
-            <form action="#" method="post">
-                <div class="d-flex justify-content-end mb-3">
-                    <a href="" class="btn btn-success">Edit</a>&nbsp;<a href="" class="btn btn-danger">Delete</a>
-                </div>
+            @if ($message = Session::get('successDelete'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ $message }}
+                <a type="button" class="btn-close" data-bs-dismiss="alert">&times;</a>
+            </div>
+            @endif
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <!--<th scope="col">Picture</th>-->
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Select</th>
-                        <!--<th scope="col"></th>-->
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($viewData['products'] as $product)
                         <tr>
                             <th scope="row">{{ $product->getId() }}</th>
+                            <!--<td><img src="{{ asset('/storage/'.$product->getImage()) }}" width="8%" height="8%"></td>-->
                             <td>{{ $product->getName() }}</td>
                             <td>{{ $product->getDescription() }}</td>
                             <td>{{ $product->getPrice() }}</td>
                             <td>
-                            <input type="checkbox" name="id" value="{{ $product->getId() }}">
+                            <button class="btn btn-success"><i href="" class="bi-pencil"></i></button>&nbsp;
+                            <a href="#" class="btn btn-danger bi-trash" onclick="if(confirm('Êtes-vous sûr(e) de supprimer cet enregistrement ?')){ document.getElementById('product-{{ $product->getId() }}').submit();}"></a>
+                            <form id="product-{{ $product->getId() }}" action="{{ route('admin.product.delete', $product->getId()) }}" method="post">
+                                @csrf
+                                @method('delete')
+                            </form>
                             </td>
-                            <!--<td>
-                                <a href="" class="btn btn-success">Edit</a> 
-                                <a href="" class="btn btn-danger">Delete</a>
-                            </td>-->
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            </form>
         </div>
     </div>
 @endsection

@@ -18,6 +18,13 @@ class Products extends Model
      * $this->attributes['created_at'] - string - contains the product creation date
      * $this->attributes['updated_at'] - string - contains the product update date
      */
+
+    //protected $fillable = [
+    //    'name',
+    //    'description',
+    //    'price',
+    //    'image',
+    //];
     
     public function getId()
     {
