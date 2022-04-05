@@ -24,6 +24,13 @@
             </div>
             @endif
 
+            @if ($message = Session::get('successUpdate'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ $message }}
+                <a type="button" class="btn-close" data-bs-dismiss="alert">&times;</a>
+            </div>
+            @endif
+
             <form method="POST" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -61,7 +68,7 @@
                     <label for="description" class="form-label">description</label>
                     <textarea name="description" class="form-control">{{ old('description') }}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary"><i href="" class="bi bi-bag-plus-fill"></i></button>
+                <button type="submit" class="btn btn-primary bi bi-bag-plus-fill"> Add new product</button>
             </form>
         </div>
     </div>
@@ -84,7 +91,8 @@
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,7 +104,9 @@
                             <td>{{ $product->getDescription() }}</td>
                             <td>{{ $product->getPrice() }}</td>
                             <td>
-                            <button class="btn btn-success"><i href="" class="bi-pencil"></i></button>&nbsp;
+                            <a href="{{ route('admin.product.edit', ['id'=>$product->getId()]) }}" class="btn btn-success bi-pencil"></a>
+                            </td>
+                            <td>
                             <a href="#" class="btn btn-danger bi-trash" onclick="if(confirm('Êtes-vous sûr(e) de supprimer cet enregistrement ?')){ document.getElementById('product-{{ $product->getId() }}').submit();}"></a>
                             <form id="product-{{ $product->getId() }}" action="{{ route('admin.product.delete', $product->getId()) }}" method="post">
                                 @csrf

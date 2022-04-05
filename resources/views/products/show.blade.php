@@ -13,7 +13,9 @@
                     {{ $viewData['product']->getName() }} (${{ $viewData['product']->getPrice() }})
                 </h5>
                 <p class="card-text">{{ $viewData['product']->getDescription() }}</p>
-                <p class="card-text"><small class="btn btn-outline-success">Add to Cart</small></p>
+                <p class="card-text"><small class="btn btn-outline-success">Add to Cart</small>&nbsp;
+                <a href="{{ route('products.index') }}" class="btn btn-outline-warning">Back to product list</a>
+                </p>
             </div>
         </div>
     </div>

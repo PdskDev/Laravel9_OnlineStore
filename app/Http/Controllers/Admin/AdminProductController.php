@@ -61,4 +61,42 @@ class AdminProductController extends Controller
         Products::destroy($id);
         return back()->with("successDelete", "The product has been permanently deleted");
     }
+
+    public function edit($id)
+    {
+        $viewData = [];
+        $viewData['title'] = "Admin Page - Edit Product - Online Store";
+        $viewData['product'] = Products::findOrFail($id);
+        return view('admin.product.edit')->with('viewData', $viewData);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            "name"=>"required|max:150",
+            "description"=>"required",
+            "price"=>"required|numeric|gt:0",
+            "image"=>"image",
+        ]);
+
+        $product = Products::findOrFail($id);
+        $product->setName($request->input("name"));
+        $product->setDescription($request->input("description"));
+        $product->setPrice($request->input("price"));
+
+        if($request->hasFile('image')){
+            $imageName = $product->getId().".".$request->file('image')->extension();
+            Storage::disk('public')->put(
+                $imageName,
+                file_get_contents($request->file('image')->getRealPath())
+            );
+            $product->setImage($imageName);
+            $product->save();
+        }else{
+            $product->setImage("game.png");
+        }
+
+        $product->save();
+        return redirect()->route('admin.product.index')->with('successUpdate', 'The information of product "'.$product->getName().'" has been updated successfully');
+    }
 }
