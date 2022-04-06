@@ -21,25 +21,40 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{ route('home.index')}}">Home</a>
+                <a class="nav-link" aria-current="page" href="{{ route('home.index')}}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{ route('products.index')}}">Products</a>
+                <a class="nav-link" aria-current="page" href="{{ route('products.index')}}">Products</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('home.about')}} ">About</a>
               </li>
+              <div class="vr bg-white mx-2 d-none d-lg-block"></div>
+              @guest
+              <a class="nav-link active" href="{{ route('login') }}">Login</a>
+              <a class="nav-link active" href="{{ route('register') }}">Register</a>
+              @else
+
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Account
+                  <a role="button" class="nav-link dropdown-toggle active" id="navbarDropdown" 
+                  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">User account</span>
+                  
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item" href="#">User information</a></li>
+                  <li><a class="dropdown-item" href="#">Change password</a></li>
+                  <li>
+                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                      @csrf
+                    <a class="dropdown-item" href="#" onclick="document.getElementById('logout').submit()">Logout</a>
+                  </form>
+                  </li>
                 </ul>
               </li>
+
+              @endguest
+              
             </ul>
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

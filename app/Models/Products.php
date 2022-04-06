@@ -25,6 +25,10 @@ class Products extends Model
     //    'price',
     //    'image',
     //];
+
+    /**
+     * Getters and Setters for this model
+     */
     
     public function getId()
     {
@@ -94,5 +98,18 @@ class Products extends Model
     public function setUpdatedAt($updatedAt)
     {
         $this->attributes['updated_at'] = $updatedAt;
+    }
+
+    /**
+     * To validate forms input add/edit
+     */
+    public static function validate($request)
+    {
+        $request->validate([
+            "name"=>"required|max:150",
+            "description"=>"required",
+            "price"=>"required|numeric|gt:0",
+            "image"=>"image",
+        ]);
     }
 }

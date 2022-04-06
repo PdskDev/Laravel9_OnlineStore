@@ -89,14 +89,23 @@
                     </form>
 
                     <!-- Topbar Navbar -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-                            <img class="img-profile rounded-circle"
-                                src="{{ asset('img/undraw_profile.svg') }}">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle show" data-bs-toggle="dropdown" href="#" role="button" 
+                        aria-haspopup="false" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                        <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
                         </a>
-                    </li>
+                        <div class="dropdown-menu show" data-bs-popper="none">
+                          <a class="dropdown-item" href="#">User information</a>
+                          <a class="dropdown-item" href="#">Change password</a>
+                          <a class="dropdown-item" href="#">
+                            <form id="logout" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                              <a class="dropdown-item" href="#" onclick="document.getElementById('logout').submit()">Logout</a>
+                            </form>
+                          </a>
+                        </div>
+                      </li>
                 </nav>
                 <!-- End of Topbar -->
 
