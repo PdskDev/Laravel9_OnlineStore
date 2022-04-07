@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,10 @@ Route::get('/about', 'App\Http\Controllers\HomeController@about')->name('home.ab
 
 Route::get('/products/list', 'App\Http\Controllers\ProductsController@index')->name('products.index');
 Route::get('/products/show/{id}', 'App\Http\Controllers\ProductsController@show')->name('products.show');
+
+Route::get('/cart', 'App\Http\Controllers\CartController@index')->name('cart.index');
+Route::get('/cart/delete', 'App\Http\Controllers\CartController@delete')->name('cart.delete');
+Route::put('/cart/add/{id}', 'App\Http\Controllers\CartController@add')->name('cart.add');
 
 Route::middleware('admin')->group(function(){
 Route::get('/admin', 'App\Http\Controllers\Admin\AdminHomeController@index')->name('admin.home.index');

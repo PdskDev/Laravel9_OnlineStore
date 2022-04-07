@@ -112,4 +112,17 @@ class Products extends Model
             "image"=>"image",
         ]);
     }
+
+    /**
+     * This function calculate cart total price
+     */
+
+    public static function sumPricesByQuantities($products, $productsInSession)
+    {
+        $total = 0;
+        foreach ($products as $product) {
+            $total = $total + ($product->getPrice()*$productsInSession[$product->getId()]);
+        }
+        return $total;
+    }
 }

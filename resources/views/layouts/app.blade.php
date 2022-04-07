@@ -27,6 +27,9 @@
                 <a class="nav-link" aria-current="page" href="{{ route('products.index')}}">Products</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ route('cart.index') }}">Cart</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{ route('home.about')}} ">About</a>
               </li>
               <div class="vr bg-white mx-2 d-none d-lg-block"></div>
