@@ -37,14 +37,18 @@
               <a class="nav-link active" href="{{ route('login') }}">Login</a>
               <a class="nav-link active" href="{{ route('register') }}">Register</a>
               @else
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ route('myaccount.orders')}} ">My Orders</a>
+              </li>
 
               <li class="nav-item dropdown">
                   <a role="button" class="nav-link dropdown-toggle active" id="navbarDropdown" 
                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">User account</span>
+                  <span class="mr-2 d-none d-lg-inline">Logged as {{\Auth::user()->name}}</span>
                   
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{{ route('myaccount.orders') }}">My orders</a></li>
                   <li><a class="dropdown-item" href="#">User information</a></li>
                   <li><a class="dropdown-item" href="#">Change password</a></li>
                   <li>

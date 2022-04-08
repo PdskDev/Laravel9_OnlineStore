@@ -6,7 +6,7 @@
     @if ($message = Session::get('successDelete'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ $message }}
-                <a type="button" class="btn-close" data-bs-dismiss="alert">&times;</a>
+                <a type="button" class="btn-close" data-bs-dismiss="alert"></a>
             </div>
             @endif
     @foreach ($viewData['products'] as $product)

@@ -13,21 +13,21 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-                <a type="button" class="btn-close" data-bs-dismiss="alert">&times;</a>
+                <a type="button" class="btn-close" data-bs-dismiss="alert"></a>
             </div>
             @endif
 
             @if ($message = Session::get('successAdd'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ $message }}
-                <a type="button" class="btn-close" data-bs-dismiss="alert">&times;</a>
+                <a type="button" class="btn-close" data-bs-dismiss="alert"></a>
             </div>
             @endif
 
             @if ($message = Session::get('successUpdate'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ $message }}
-                <a type="button" class="btn-close" data-bs-dismiss="alert">&times;</a>
+                <a type="button" class="btn-close" data-bs-dismiss="alert"></a>
             </div>
             @endif
 
@@ -80,7 +80,7 @@
             @if ($message = Session::get('successDelete'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ $message }}
-                <a type="button" class="btn-close" data-bs-dismiss="alert">&times;</a>
+                <a type="button" class="btn-close" data-bs-dismiss="alert"></a>
             </div>
             @endif
             <table class="table table-bordered table-hover">
