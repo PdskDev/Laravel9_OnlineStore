@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +15,8 @@ class AdminProductController extends Controller
         $viewData = [];
         $viewData['menu_active']="product";
         $viewData['title'] = "Admin Page - Products - Online Store";
-        $viewData['products'] = Products::all();
+        //$viewData['products'] = Products::all()->paginate(5);
+        $viewData['products'] = Products::orderBy("id", "asc")->paginate(3);
         return view('admin.product.index')->with('viewData', $viewData);
     }
 

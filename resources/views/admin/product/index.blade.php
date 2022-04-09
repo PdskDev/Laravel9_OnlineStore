@@ -117,6 +117,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center mt-2 mb-2">
+                {{ $viewData['products']->links() }}
+              </div>
         </div>
     </div>
 @endsection

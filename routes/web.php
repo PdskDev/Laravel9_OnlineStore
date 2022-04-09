@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StripePaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,14 @@ Route::get('/cart', 'App\Http\Controllers\CartController@index')->name('cart.ind
 Route::get('/cart/delete', 'App\Http\Controllers\CartController@delete')->name('cart.delete');
 Route::put('/cart/add/{id}', 'App\Http\Controllers\CartController@add')->name('cart.add');
 
+//Route::get('/checkout', 'App\Http\Controllers\PaymentController​@checkout')->name('payment.checkout');
+//Route::post('/checkout', 'App\Http\Controllers\PaymentController@checkout')->name('payment.checkout');
+
+Route::get('/checkout', 'App\Http\Controllers\StripePaymentController@stripe')->name('stripe.checkout');
+Route::post('/checkout', 'App\Http\Controllers\StripePaymentController@stripe')->name('stripe.checkout');
+Route::post('/payment', 'App\Http\Controllers\StripePaymentController@stripePost')->name('stripe.payment');
+Route::get('/payment', 'App\Http\Controllers\StripePaymentController@stripePost')->name('stripe.payment');
+
 Route::middleware('auth')->group(function() {
     Route::get('cart/purchase', 'App\Http\Controllers\CartController@purchase')->name('cart.purchase');
     Route::get('/my-account/orders', 'App\Http\Controllers\MyAccountController@orders')->name('myaccount.orders');
@@ -51,4 +60,6 @@ Route::put('/admin/products/update/{id}', 'App\Http\Controllers\Admin\AdminProdu
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
